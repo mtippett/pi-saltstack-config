@@ -9,3 +9,17 @@ Fortunately as of this writing, raspbian already has salt-minion available with 
     apt-get install salt-minion
 
 # Initial Configuration
+
+## Configuring Master
+
+# Sample execution
+
+
+
+# Further useful references
+
+## Raspberry Pi saltstack
+
+Some useful forumulas for configuring the kernel configuration
+
+    https://github.com/daschatten/raspberrypi-formula

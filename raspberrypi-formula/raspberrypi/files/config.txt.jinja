@@ -1,0 +1,5 @@
+{%- set config = salt['pillar.get']('raspberrypi:config', {}) %}
+
+{%- for key, value in config|dictsort %}
+{{ key }}={{ value }}
+{%- endfor %}
