@@ -1,0 +1,11 @@
+# See https://www.raspberrypi.org/documentation/configuration/config-txt.md
+# for all available config options.
+
+raspberrypi:
+  config:
+    hdmi_group: 1
+    hdmi_mode: 4
+    hdmi_drive: 2
+    hdmi_force_edid_audio: 1
+    hdmi_force_hotplug: 1
+    decode_MPG2: "0x12345678"
