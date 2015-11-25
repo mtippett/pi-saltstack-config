@@ -112,7 +112,6 @@ Congratulations.  Your saltstack configuration has been confirmed.
 
 
 
-
 # Further useful references
 
 ## Raspberry Pi saltstack
