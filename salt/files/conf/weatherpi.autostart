@@ -1,0 +1,7 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xset s off
+@xset s noblank
+@xset -dpms
+@midori -e Fullscreen -a http://localhost/index.html
+@unclutter -idle 0
