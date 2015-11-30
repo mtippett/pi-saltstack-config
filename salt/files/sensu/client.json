@@ -1,0 +1,9 @@
+{
+  "client": {
+    "name": "{{ grains['host'] }}",
+    "address": "{{ grains['ipv4'][1] }}",
+    "subscriptions": [
+      "test"
+    ]
+  }
+}
