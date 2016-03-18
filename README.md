@@ -16,11 +16,53 @@ and
 
 However, to use modern features, you need to install the the minion via salt bootstrap - more information at https://docs.saltstack.com/en/latest/topics/tutorials/salt_bootstrap.html
 
-Double Unfortunately, the current raspbian release of Jessie doesn't work with the current build of boostrap, failing to install with dependency failures.
+Double unfortunately, the current raspbian release of Jessie doesn't work with the current build of salt-bootstrap, failing to install with dependency failures.
 
-However, the semi-manual boostrap install wil work.
+However, the semi-manual bootstrap install will work.
 
-### Semi-manual the system
+### salt-ssh setup of the system
+
+Although you can install the packages manually as below, the `salt-ssh` command will make most of the work trivial - and will utilize the state files used to manage the system.  Since I am using a Raspbian Jessie based image, you should first make sure that the distribution you are using is running Jessie (or at least a up to date version of wheezy - YMMV).
+
+Assuming that your system is up to date and the your system will accept the packages correctly.  The following can be done to initialize the system using the state in this repository.
+
+TO follow this step you also need to ensure that you can log in with root via ssh (this can turned off when you finish bootstrapping).
+
+
+#### Installing the base packages
+
+Although the final setup will be completed using salt-ssh, the system needs to be able to run the basic salt commands.  This unfortunately manes installing the base set of packages that are needed.  This is accomplished by
+
+    apt-get install python-singledispatch python-m2crypto python-crypto python-pip
+    pip install backports_abc
+
+#### Establishing ssh awareness of the new minion
+
+Outside of salt-ssh, you should connect to the target minion with ssh as root to make sure that you can log in with a password and that the host is added to the masters `known_hosts` file.
+
+#### Establishing the agentless minion
+
+On the master, a file called `/etc/salt/roster` contains the hosts and the alias that salt will use.  An example is shown below.
+
+    weatherpi: 192.168.1.72
+    rpi-work: 192.168.1.110
+
+After establishing host awareness, you should be able to run the following command.
+
+    $ sudo salt-ssh  rpi-work state.sls test.ping
+    Permission denied for host rpi-work, do you want to deploy the salt-ssh key? (password required): [Y/n] y
+    Password for root@rpi-work:    
+
+This will deposit an ssh key into the authorized_hosts on the new minion.
+
+Now you can run the
+
+    $ sudo salt-ssh  rpi-work test.ping
+    rpi-work:
+        True
+
+
+### Semi-manual setup of the system
 
 You will need to install the set of packages that represent the dependencies for saltstack.   These are pulled from `install_salt.sh`
 
